@@ -56,14 +56,14 @@ lazy val commonSettings = Seq(
   crossScalaVersions := Seq("2.12.8", "2.11.12"),
   parallelExecution in Global := false,
   traceLevel   := 15,
-  maxErrors    := 5,
+  maxErrors    := 3,
   libraryDependencies ++= Seq("chisel3").map {
   dep: String => "edu.berkeley.cs" %% dep % sys.props.getOrElse(dep + "Version", defaultVersions(dep)) },
   addCompilerPlugin("org.scalamacros" % "paradise" % "2.1.1" cross CrossVersion.full)
 )
 
 lazy val macros   = (project in file("macros")).settings(commonSettings)
-lazy val marshall = (project in file("."))
+lazy val rocket = (project in file("."))
   .settings(commonSettings)
   .dependsOn(macros)
   .aggregate(macros) // <-- means the running task on rocketchip is also run by aggregate tasks
